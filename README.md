@@ -1,6 +1,6 @@
 # Приложение банка #
 
-Логику приложения можно посмотреть здесь **[AppRoadMap](https://www.bootdey.com/snippets/view/bs4-contact-cards)**
+Логику приложения можно посмотреть здесь **[AppRoadMap](https://github.com/OlegGromov91/Bank/blob/main/bankProject/README.md)**
 
 ### **В проекте были задействованы следующие технологии:** ###
 ___
