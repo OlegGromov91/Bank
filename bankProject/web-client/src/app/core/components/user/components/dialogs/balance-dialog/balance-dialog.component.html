@@ -1,0 +1,26 @@
+<h2 mat-dialog-title class="dialog-text">Пополнение баланса карты</h2>
+<mat-dialog-content class="mat-typography" style="align-content: center">
+  <form [formGroup]="increaseBalanceForm" class="form-container">
+    <mat-card-content>
+      <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>сумма пополнения</mat-label>
+        <input matInput formControlName="money" type="number" class="example-right-align" placeholder="0"
+               style="margin-left: 5px">
+        <span matPrefix *ngIf="currencyType == 'RUR'">&#8381;</span>
+        <span matPrefix *ngIf="currencyType == 'USD'">$&nbsp;</span>
+        <span matPrefix *ngIf="currencyType == 'EUR'">&#x20ac;</span>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="increaseBalanceForm.invalid" (click)="increaseBalance()" mat-raised-button
+              color="primary">Пополнить
+      </button>
+      <button mat-button (click)="close()">Отмена</button>
+    </mat-card-actions>
+  </form>
+</mat-dialog-content>
+
+
+
+
+

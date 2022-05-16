@@ -1,0 +1,33 @@
+<form [formGroup]="unlockCardForm" class="form-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title style="text-align: center">Заявка на</mat-card-title>
+      <mat-card-title>разблокировку карты</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-6 card-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Секретный код</mat-label>
+            <input formControlName="secretWord" matInput [type]="hide ? 'password' : 'text'"
+                   placeholder="секретный код">
+            <mat-error *ngIf="unlockCardForm.invalid">введите секретный код</mat-error>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="unlockCardForm.invalid" (click)="sendRequestForUnlockCard()" mat-raised-button
+              color="primary">Подать заявку
+      </button>
+      <button mat-button mat-dialog-close>Отмена</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+<div class="help">"Подсказка: секретный код</div>
+<div class="help">для юзера - spring</div>
+

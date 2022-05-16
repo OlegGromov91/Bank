@@ -1,0 +1,55 @@
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+.gradient-custom {
+  background: #11cb71;
+  background: -webkit-linear-gradient(
+      to right,
+      rgba(65, 128, 97, 1),
+      rgba(84, 227, 157, 1)
+  );
+  background: linear-gradient(
+      to right,
+      rgba(65, 128, 97, 1),
+      rgba(84, 227, 157, 1)
+  );
+}
+
+.text-info:hover {
+  background: rgba(43, 103, 46, 0.47);
+}
+
+.text-info:active {
+  background: rgb(61, 255, 41);
+  transform: scale(0.95);
+}
+
+.active {
+  background: rgba(59, 70, 138, 0.35);
+
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+.error.mat-snack-bar-container{
+  color: white;
+  background: #ff2712;
+}
+
+.success.mat-snack-bar-container{
+  color: #000000;
+  background: #11cb71;
+}

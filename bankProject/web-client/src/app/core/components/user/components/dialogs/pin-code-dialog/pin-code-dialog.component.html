@@ -1,0 +1,21 @@
+<h2 mat-dialog-title class="dialog-text">Проверка пин кода</h2>
+<mat-dialog-content class="mat-typography">
+  <p>Для продолжения введите пин код карты.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <form [formGroup]="checkPinCodeForm" class="form-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Пин код</mat-label>
+      <input formControlName="pinCode" matInput [type]="hide ? 'password' : 'text'" placeholder="пин код">
+      <mat-error *ngIf="checkPinCodeForm.invalid">Необходимо ввести четыре цифры</mat-error>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="margin-left: 10px" (click)="checkCardPinCode()">
+    Проверить
+  </button>
+  <button mat-button mat-dialog-close>Отмена</button>
+</mat-dialog-actions>

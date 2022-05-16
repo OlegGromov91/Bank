@@ -1,0 +1,16 @@
+<h2 mat-dialog-title class="dialog-text"> Меню разблокировки карты</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-card-content>
+    <h3>ФИО клиента:</h3>
+    <p> {{unlockRequest.user.firstName}} {{unlockRequest.user.firstName}} {{unlockRequest.user.firstName}}</p>
+    <h3>Номер карты клиента:</h3>
+    <p>{{unlockRequest.card.cardNumber}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="unlockCard(unlockRequest)" mat-raised-button
+            color="primary">Разблокировать карту
+    </button>
+    <button mat-button mat-dialog-close>Отмена</button>
+  </mat-card-actions>
+</mat-dialog-content>
+

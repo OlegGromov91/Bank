@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="row">
+    <div class="{{changeCardClassToCol(!transferToUserSelfForm.dirty && !transferFromCardToBankAccountForm.dirty)}}">
+      <form *ngIf="!transferToUserSelfForm.dirty && !transferFromCardToBankAccountForm.dirty"
+            [formGroup]="transferToOtherUserForm" class="form-container">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Перевод средств клиенту нашего банка</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row card-holder">
+              <div class="col-md-6 card-group">
+                <mat-card>
+                  <mat-label>Номер вашей карты:</mat-label>
+                  <p>{{card.cardNumber}}</p>
+                </mat-card>
+              </div>
+              <div class="col-md-6 card-group">
+                <mat-card>
+                  <mat-label>Баланс вашей карты:</mat-label>
+                  <p matPrefix *ngIf="card.currencyType == 'RUR'">&#8381;{{card.moneyAmount}}</p>
+                  <p matPrefix *ngIf="card.currencyType == 'USD'">$&nbsp;{{card.moneyAmount}}</p>
+                  <p matPrefix *ngIf="card.currencyType == 'EUR'">&#x20ac;{{card.moneyAmount}}</p>
+                </mat-card>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 card-group">
+                <mat-form-field appearance="fill" floatLabel="always">
+                  <mat-label>Номер карты получателя</mat-label>
+                  <input matInput formControlName="cardRecipientNumber" type="number" class="example-right-align"
+                         placeholder="16-значный номер" style="margin-left: 5px">
+                  <mat-error *ngIf="transferToOtherUserForm.invalid">Номер карты нашего банка должен содержать
+                    индетификатор
+                    банка
+                    *{{getIdentify()}}*********
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 card-group">
+                <mat-form-field appearance="fill" floatLabel="always">
+                  <mat-label>сумма перевода</mat-label>
+                  <input matInput formControlName="money" type="number" class="example-right-align" placeholder="0"
+                         style="margin-left: 5px" [max]="card.moneyAmount">
+                  <span matPrefix *ngIf="card.currencyType == 'RUR'">&#8381;</span>
+                  <span matPrefix *ngIf="card.currencyType == 'USD'">$&nbsp;</span>
+                  <span matPrefix *ngIf="card.currencyType == 'EUR'">&#x20ac;</span>
+                  <mat-error *ngIf="transferToOtherUserForm.invalid">Сумма не должна превышать сумму на вашей карте и
+                    должны
+                    быть
+                    больше {{minMoneyAmount}}.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button
+                    color="primary" style="margin-top: 10px" (click)="transferMoneyWithCardWithinSystem()"
+                    [disabled]="transferToOtherUserForm.invalid">Перевести
+            </button>
+            <button mat-button mat-dialog-close>Отмена</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
+    <div class="{{changeCardClassToCol(!transferToOtherUserForm.dirty && !transferFromCardToBankAccountForm.dirty)}}">
+      <form *ngIf="!transferToOtherUserForm.dirty && !transferFromCardToBankAccountForm.dirty"
+            [formGroup]="transferToUserSelfForm" class="form-container">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Перевод средств между вашими картами</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row card-holder">
+              <div class="col-md-6 card-group">
+                <mat-card>
+                  <mat-label>Номер вашей карты:</mat-label>
+                  <p>{{card.cardNumber}}</p>
+                </mat-card>
+              </div>
+              <div class="col-md-6 card-group">
+                <mat-card>
+                  <mat-label>Баланс вашей карты:</mat-label>
+                  <p matPrefix *ngIf="card.currencyType == 'RUR'">&#8381;{{card.moneyAmount}}</p>
+                  <p matPrefix *ngIf="card.currencyType == 'USD'">$&nbsp;{{card.moneyAmount}}</p>
+                  <p matPrefix *ngIf="card.currencyType == 'EUR'">&#x20ac;{{card.moneyAmount}}</p>
+                </mat-card>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 card-group">
+                <mat-form-field appearance="outline">
+                  <mat-label>Выберите карту</mat-label>
+                  <mat-select formControlName="cardNumber">
+                    <mat-option value="{{userCard.cardNumber}}"
+                                *ngFor="let userCard of excludeUserFromCard(card.cardNumber)">{{userCard.cardNumber}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="transferToUserSelfForm.invalid">Выбирите карту</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 card-group">
+                <mat-form-field appearance="fill" floatLabel="always">
+                  <mat-label>сумма перевода</mat-label>
+                  <input matInput formControlName="money" type="number" class="example-right-align" placeholder="0"
+                         style="margin-left: 5px" [max]="card.moneyAmount">
+                  <span matPrefix *ngIf="card.currencyType == 'RUR'">&#8381;</span>
+                  <span matPrefix *ngIf="card.currencyType == 'USD'">$&nbsp;</span>
+                  <span matPrefix *ngIf="card.currencyType == 'EUR'">&#x20ac;</span>
+                  <mat-error *ngIf="transferToUserSelfForm.invalid">Сумма не должна превышать сумму на вашей карте и
+                    должны
+                    быть
+                    больше {{minMoneyAmount}}.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button
+                    color="primary" style="margin-top: 10px" (click)="transferMoneyToUserSelf()"
+                    [disabled]="transferToUserSelfForm.invalid">Перевести
+            </button>
+            <button mat-button mat-dialog-close>Отмена</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="{{changeCardClassToCol((!transferToOtherUserForm.dirty && !transferToUserSelfForm.dirty))}}">
+      <form *ngIf="!transferToOtherUserForm.dirty && !transferToUserSelfForm.dirty"
+            [formGroup]="transferFromCardToBankAccountForm" class="form-container">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Перевод средств на ваш счет</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row card-holder">
+              <div class="col-md-6 card-group">
+                <mat-card>
+                  <mat-label>Номер вашей карты:</mat-label>
+                  <p>{{card.cardNumber}}</p>
+                </mat-card>
+              </div>
+              <div class="col-md-6 card-group">
+                <mat-card>
+                  <mat-label>Баланс вашей карты:</mat-label>
+                  <p matPrefix *ngIf="card.currencyType == 'RUR'">&#8381;{{card.moneyAmount}}</p>
+                  <p matPrefix *ngIf="card.currencyType == 'USD'">$&nbsp;{{card.moneyAmount}}</p>
+                  <p matPrefix *ngIf="card.currencyType == 'EUR'">&#x20ac;{{card.moneyAmount}}</p>
+                </mat-card>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 card-group">
+                <mat-form-field appearance="outline">
+                  <mat-label>Выберите счет</mat-label>
+                  <mat-select formControlName="beneficiaryAccount">
+                    <mat-option value="{{userBankAccount.beneficiaryAccount}}"
+                                *ngFor="let userBankAccount of getUserBankAccountEntry()">{{userBankAccount.beneficiaryAccount}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="transferFromCardToBankAccountForm.invalid">Выбирите счет</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 card-group">
+                <mat-form-field appearance="fill" floatLabel="always">
+                  <mat-label>сумма перевода</mat-label>
+                  <input matInput formControlName="money" type="number" class="example-right-align" placeholder="0"
+                         style="margin-left: 5px" [max]="card.moneyAmount">
+                  <span matPrefix *ngIf="card.currencyType == 'RUR'">&#8381;</span>
+                  <span matPrefix *ngIf="card.currencyType == 'USD'">$&nbsp;</span>
+                  <span matPrefix *ngIf="card.currencyType == 'EUR'">&#x20ac;</span>
+                  <mat-error *ngIf="transferFromCardToBankAccountForm.invalid">Сумма не должна превышать сумму на вашей
+                    карте и
+                    должна
+                    быть
+                    больше {{minMoneyAmount}}.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button
+                    color="primary" style="margin-top: 10px" (click)="transferMoneyFromCardToBankAccount()"
+                    [disabled]="transferFromCardToBankAccountForm.invalid">Перевести
+            </button>
+            <button mat-button mat-dialog-close>Отмена</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
+    <div *ngIf="(!transferFromCardToBankAccountForm.dirty)" class="col"></div>
+  </div>
+</div>

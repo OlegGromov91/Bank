@@ -1,0 +1,14 @@
+<h2 mat-dialog-title class="dialog-text">Перевод на карту или счет</h2>
+<mat-dialog-content class="mat-typography">
+  <p>Выбирите тип перевода.</p>
+  <p> Перевод на карту другого банка возможен только с комиссией.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="choseTransferWithinSystem()">Первод внутри
+    нашего банка
+  </button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="choseTransferOutsideSystem()">Первод в
+    другой банк
+  </button>
+  <button mat-button mat-dialog-close>Отмена</button>
+</mat-dialog-actions>

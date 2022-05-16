@@ -1,0 +1,62 @@
+<form [formGroup]="cardCreateForm" class="form-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Выпуск карты</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-6 card-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Пин код</mat-label>
+            <input formControlName="pinCode" matInput [type]="hide ? 'password' : 'number'" placeholder="пин код">
+            <mat-error *ngIf="cardCreateForm.invalid">пин код должен содежрать четыре цифры</mat-error>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 card-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Тип карты</mat-label>
+            <mat-select formControlName="cardType">
+              <mat-option value="DEBUT">Дебютовая карта</mat-option>
+              <mat-option value="CREDIT">Кредитная карта</mat-option>
+            </mat-select>
+            <mat-error *ngIf="cardCreateForm.invalid">Выбирите тип карты</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 card-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Тип валюты</mat-label>
+            <mat-select formControlName="currencyType">
+              <mat-option value="RUR">Рубль</mat-option>
+              <mat-option value="EUR">Евро</mat-option>
+              <mat-option value="USD">Доллар</mat-option>
+            </mat-select>
+            <mat-error *ngIf="cardCreateForm.invalid">Выбирите тип валюты</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 card-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Платежная система</mat-label>
+            <mat-select formControlName="paymentSystem">
+              <mat-option value="MIR">Мир</mat-option>
+              <mat-option value="VISA">Виза</mat-option>
+              <mat-option value="MASTERCARD">Мастер карт</mat-option>
+            </mat-select>
+            <mat-error *ngIf="cardCreateForm.invalid">Выбирите платежную систему</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="cardCreateForm.invalid" (click)="createNewCard(cardCreateForm)" mat-raised-button
+              color="primary">Выпустить карту
+      </button>
+      <button mat-button mat-dialog-close>Отмена</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

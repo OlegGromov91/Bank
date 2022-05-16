@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-sm">
+    <mat-card class="bank-card-header-card gradient-custom">
+      <mat-card-title class="bank-card-header-title">Кошелек</mat-card-title>
+    </mat-card>
+  </div>
+  <div class="col-sm"></div>
+  <div class="col-sm"></div>
+</div>
+
+<!-- КАРТЫ  -->
+<div class="row">
+  <mat-card class="col-xl-3 col-md-6 mb-4 bank-card gradient-2" *ngFor="let card of cardsEntry | paginate :
+          { id: 'card_pagination',
+                  itemsPerPage: 4,
+                  currentPage: currentCardPageNumber,
+                   totalItems: totalCardRecords}"
+            style="background-image: url({{getCardTypeBackgroundSrc(card.cardType)}});">
+    <mat-card-title>
+      <img class="bank-logo" mat-card-sm-image src="{{cardLogoSrc}}"></mat-card-title>
+    <mat-card-subtitle class="block-alert" *ngIf="card.isBlock">
+      <mat-icon>error_outline</mat-icon>
+      Карта заблокирована!
+    </mat-card-subtitle>
+    <mat-card-subtitle class="{{getTextColorsClass(card.cardType)}}" *ngIf="!card.isBlock">
+      <mat-icon>done_outline</mat-icon>
+      Карта активна
+    </mat-card-subtitle>
+    <mat-card-content>
+      <h3 matPrefix *ngIf="card.currencyType == 'RUR'"
+          class="{{getTextColorsClass(card.cardType)}}">{{card.moneyAmount}} &#8381; </h3>
+      <h3 matPrefix *ngIf="card.currencyType == 'USD'"
+          class="{{getTextColorsClass(card.cardType)}}">{{card.moneyAmount}} $&nbsp; </h3>
+      <h3 matPrefix *ngIf="card.currencyType == 'EUR'"
+          class="{{getTextColorsClass(card.cardType)}}">{{card.moneyAmount}} &#x20ac; </h3>
+      <br>
+      <h2 class="{{getTextColorsClass(card.cardType)}}">{{card.cardNumber}}</h2>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="expire-date {{getTextColorsClass(card.cardType)}}">{{card.expiredDate}}</div>
+      <img class="payment-logo" mat-card-sm-image src="{{getPaymentSystemSrc(card.paymentSystem)}}">
+    </mat-card-footer>
+    <button class="card-btn" (click)="validatePinCode(card.cardId)"></button>
+  </mat-card>
+  <div class="pagination">
+    <pagination-controls id="card_pagination" [maxSize]="10" [directionLinks]="true"
+                         (pageChange)="currentCardPageNumber = $event"></pagination-controls>
+  </div>
+</div>
+<!-- СЧЕТА  -->
+<div class="row">
+  <mat-card class="col-xl-3 col-md-6 mb-4 bank-card gradient-2" *ngFor="let bankAccount of bankAccountEntry | paginate :
+          { id: 'bank_account_pagination',
+                  itemsPerPage: 4,
+                  currentPage: currentBankAccountPageNumber,
+                   totalItems: totalBankAccountRecords}"
+            style="background-image: url('/assets/img/card/background/bank-account-background.png')">
+    <mat-card-title>
+      <img class="bank-logo" mat-card-sm-image src="{{cardLogoSrc}}"></mat-card-title>
+    <mat-card-subtitle class="block-alert" *ngIf="!bankAccount.active">
+      <mat-icon>error_outline</mat-icon>
+      Счет заблокирован!
+    </mat-card-subtitle>
+    <mat-card-subtitle class="" *ngIf="bankAccount.active">
+      <mat-icon>done_outline</mat-icon>
+      Счет активен
+    </mat-card-subtitle>
+    <mat-card-content>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+          </div>
+          <div class="col">
+            <h2 class="">{{bankAccount.beneficiaryAccount}}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p matPrefix *ngIf="bankAccount.currencyType == 'RUR'" class="">{{bankAccount.moneyAmount}} &#8381;</p>
+          </div>
+          <div class="col">
+            БИК
+            <h3 class="">{{bankAccount.bik}}</h3>
+          </div>
+          <div class="col">
+            ИНН
+            <h3 class="">{{bankAccount.inn}}</h3>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="expire-date">{{bankAccount.expiredDate}}</div>
+    </mat-card-footer>
+    <button class="card-btn" (click)="openChoseBankAccountOperationDialog(bankAccount)"></button>
+  </mat-card>
+  <div class="pagination">
+    <pagination-controls id="bank_account_pagination" [maxSize]="10" [directionLinks]="true"
+                         (pageChange)="currentBankAccountPageNumber = $event"></pagination-controls>
+  </div>
+</div>

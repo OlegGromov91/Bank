@@ -1,0 +1,64 @@
+<form [formGroup]="transferFromBankAccountToBankAccountForm" class="form-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Перевод средств со счета на счет</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row card-holder">
+        <div class="col-md-6 card-group">
+          <mat-card>
+            <mat-label>Номер вашего счета:</mat-label>
+            <p>{{getBankAccountData().beneficiaryAccount}}</p>
+          </mat-card>
+        </div>
+        <div class="col-md-6 card-group">
+          <mat-card>
+            <mat-label>Баланс вашего счета:</mat-label>
+            <p matPrefix *ngIf="getBankAccountData().currencyType == 'RUR'">
+              &#8381;{{getBankAccountData().moneyAmount}}</p>
+            <p matPrefix *ngIf="getBankAccountData().currencyType == 'USD'">
+              $&nbsp;{{getBankAccountData().moneyAmount}}</p>
+            <p matPrefix *ngIf="getBankAccountData().currencyType == 'EUR'">
+              &#x20ac;{{getBankAccountData().moneyAmount}}</p>
+          </mat-card>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 card-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Выберите счет</mat-label>
+            <mat-select formControlName="beneficiaryAccount">
+              <mat-option value="{{userBankAccount.beneficiaryAccount}}"
+                          *ngFor="let userBankAccount of excludeUserFromBankAccount(getBankAccountData().beneficiaryAccount)">{{userBankAccount.beneficiaryAccount}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="transferFromBankAccountToBankAccountForm.invalid">Выбирите счет</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 card-group">
+          <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>сумма перевода</mat-label>
+            <input matInput formControlName="money" type="number" class="example-right-align" placeholder="0"
+                   style="margin-left: 5px" [max]="getBankAccountData().moneyAmount">
+            <span matPrefix *ngIf="getBankAccountData().currencyType == 'RUR'">&#8381;</span>
+            <span matPrefix *ngIf="getBankAccountData().currencyType == 'USD'">$&nbsp;</span>
+            <span matPrefix *ngIf="getBankAccountData().currencyType == 'EUR'">&#x20ac;</span>
+            <mat-error *ngIf="transferFromBankAccountToBankAccountForm.invalid">Сумма не должна превышать сумму на вашем
+              счету и
+              должна
+              быть
+              больше {{minMoneyAmount}}.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button
+              color="primary" style="margin-top: 10px" (click)="transferMoneyFromBankAccountToBankAccount()"
+              [disabled]="transferFromBankAccountToBankAccountForm.invalid">Перевести
+      </button>
+      <button mat-button mat-dialog-close>Отмена</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+

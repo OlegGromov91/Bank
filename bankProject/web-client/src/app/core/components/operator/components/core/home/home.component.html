@@ -1,0 +1,100 @@
+<div class="row">
+
+  <mat-card class="bank-card-header-card gradient-custom">
+    <mat-card-title class="bank-card-header-title">Активные заявки</mat-card-title>
+  </mat-card>
+  <div class="col-sm"></div>
+  <div class="col-sm"></div>
+</div>
+
+
+<div class="row" *ngIf="unlockRequestEntity.length == 0">
+  <mat-card class="application-empty-message gradient-custom">
+    <mat-card-subtitle class="bank-card-header-title">Заявок нет</mat-card-subtitle>
+  </mat-card>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <mat-card class="col-xl-3 col-md-6 mb-4 application-active application-card"
+              *ngFor="let unlockRequest of unlockRequestEntity | paginate :
+                { id: 'unlock_request_pagination',
+                        itemsPerPage: 3,
+                        currentPage: currentUnlockRequestPageNumber,
+                         totalItems: totalUnlockRequestRecords}">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <mat-card-title>
+              <div>
+                <mat-icon>lock</mat-icon>
+                Заявка активна
+              </div>
+            </mat-card-title>
+          </div>
+          <div class="col-sm">
+            <h3>ФИО клиента:</h3>
+            <p
+              class="user-data-application-active"> {{unlockRequest.user.firstName}} {{unlockRequest.user.firstName}} {{unlockRequest.user.firstName}}</p>
+            <h3>Номер карты клиента:</h3>
+            <p class="user-data-application-active">{{unlockRequest.card.cardNumber}}</p>
+          </div>
+        </div>
+      </div>
+      <button class="card-btn" (click)="activeUserCardForm(unlockRequest)"></button>
+    </mat-card>
+    <div class="pagination">
+      <pagination-controls id="unlock_request_pagination" [maxSize]="10" [directionLinks]="true"
+                           (pageChange)="currentUnlockRequestPageNumber = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <mat-card class="bank-card-header-card gradient-custom">
+    <mat-card-title class="bank-card-header-title">Последние закрытые заявки</mat-card-title>
+  </mat-card>
+</div>
+
+<div class="row" *ngIf="unlockRequestHistoryEntity.length == 0">
+  <mat-card class="application-empty-message gradient-custom">
+    <mat-card-subtitle class="bank-card-header-title">Заявок нет</mat-card-subtitle>
+  </mat-card>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <mat-card class="col-xl-3 col-md-6 mb-4 application-card application-done"
+              *ngFor="let unlockHistoryRequest of unlockRequestHistoryEntity | paginate :
+                { id: 'unlock_request_history_pagination_pagination',
+                        itemsPerPage: 3,
+                        currentPage: currentUnlockRequestHistoryPageNumber,
+                         totalItems: totalUnlockRequestHistoryRecords}">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <mat-card-title>
+              <div>
+                <mat-icon>done_outline</mat-icon>
+                Заявка закрыта
+              </div>
+            </mat-card-title>
+          </div>
+          <div class="col-sm">
+            <h3>ФИО клиента:</h3>
+            <p
+              class="user-data-application-done"> {{unlockHistoryRequest.user.firstName}} {{unlockHistoryRequest.user.firstName}} {{unlockHistoryRequest.user.firstName}}</p>
+            <h3>Номер карты клиента:</h3>
+            <p class="user-data-application-done">{{unlockHistoryRequest.card.cardNumber}}</p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <div class="pagination">
+      <pagination-controls id="unlock_request_history_pagination_pagination" [maxSize]="10" [directionLinks]="true"
+                           (pageChange)="currentUnlockRequestHistoryPageNumber = $event"></pagination-controls>
+    </div>
+  </div>
+</div>

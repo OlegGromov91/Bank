@@ -1,0 +1,125 @@
+<div class="row bank-cards">
+  <mat-card class="col-xl-3 col-md-6 mb-4 bank-card"
+            style="background-image: url({{getCardTypeBackgroundSrc(card.cardType)}});">
+    <mat-card-title>
+      <img class="bank-logo" mat-card-sm-image src="{{cardLogoSrc}}"></mat-card-title>
+    <mat-card-subtitle class="block-alert" *ngIf="card.isBlock">
+      <mat-icon>error_outline</mat-icon>
+      Карта заблокирована!
+    </mat-card-subtitle>
+    <mat-card-subtitle class="{{getTextColorsClass(card.cardType)}}" *ngIf="!card.isBlock">
+      <mat-icon>done_outline</mat-icon>
+      Карта активна
+    </mat-card-subtitle>
+    <mat-card-content>
+      <p matPrefix *ngIf="card.currencyType == 'RUR'" class="{{getTextColorsClass(card.cardType)}}">{{card.moneyAmount}}
+        &#8381; </p>
+      <p matPrefix *ngIf="card.currencyType == 'USD'" class="{{getTextColorsClass(card.cardType)}}">{{card.moneyAmount}}
+        $&nbsp; </p>
+      <p matPrefix *ngIf="card.currencyType == 'EUR'" class="{{getTextColorsClass(card.cardType)}}">{{card.moneyAmount}}
+        &#x20ac; </p>
+      <br>
+      <h2 class="{{getTextColorsClass(card.cardType)}}">{{card.cardNumber}}</h2>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="expire-date {{getTextColorsClass(card.cardType)}}">{{card.expiredDate}}</div>
+      <img class="payment-logo" mat-card-sm-image src="{{getPaymentSystemSrc(card.paymentSystem)}}">
+    </mat-card-footer>
+    <button [disabled]="card.isBlock" class="card-btn" (click)="choseToGoTransfer(card.cardId, card.userId)"></button>
+  </mat-card>
+
+  <mat-card class="col-xl-3 col-md-6 mb-4 bank-card"
+            style=" margin-left: 222px;  background-image: url({{getCardTypeBackgroundSrc(card.cardType)}});">
+    <mat-card-title>
+      <img class="bank-logo" mat-card-sm-image src="{{cardLogoSrc}}"></mat-card-title>
+    <mat-card-subtitle class="block-alert" *ngIf="card.isBlock">
+      <mat-icon>error_outline</mat-icon>
+      Карта заблокирована!
+    </mat-card-subtitle>
+    <mat-card-subtitle class="{{getTextColorsClass(card.cardType)}}" *ngIf="!card.isBlock">
+      <mat-icon>done_outline</mat-icon>
+      Карта активна
+    </mat-card-subtitle>
+    <mat-card-content>
+      <h1 *ngIf="card.currencyType == 'RUR'" class="{{getTextColorsClass(card.cardType)}}">Баланс = {{card.moneyAmount}}
+        &#8381;</h1>
+      <h1 *ngIf="card.currencyType == 'USD'" class="{{getTextColorsClass(card.cardType)}}">Баланс = {{card.moneyAmount}}
+        $&nbsp;</h1>
+      <h1 *ngIf="card.currencyType == 'EUR'" class="{{getTextColorsClass(card.cardType)}}">Баланс = {{card.moneyAmount}}
+        &#x20ac;</h1>
+      <button *ngIf="!card.isBlock" mat-raised-button class="{{getButtonColorsClass(card.cardType)}}"
+              (click)="openIncreaseBalanceDialog()">Пополнить баланс
+      </button>
+      <button *ngIf="card.isBlock" mat-raised-button class="block-button-alert"
+              (click)="openCardUnlockDialog()">Разблокировать карту
+      </button>
+    </mat-card-content>
+    <mat-card-footer style=" margin-left: 22px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-2">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide" style="background: white">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </div>
+          <div class="col-sm {{getTextColorsClass(card.cardType)}}">
+            Показать Cvv
+          </div>
+          <div class="col-sm">
+            <p *ngIf="!hide" class="{{getTextColorsClass(card.cardType)}}">
+              переделать на CVV
+            </p>
+          </div>
+        </div>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>
+<div class="row">
+  <mat-divider class=divider></mat-divider>
+</div>
+
+<div class="row bank-cards">
+  <h1 class="history-header">История операций по карте</h1>
+  <table mat-table [dataSource]="historyData" matSort>
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Номер транзакции</th>
+      <td mat-cell *matCellDef="let row" class="{{choseColumnClassColor(row.isSuccess)}}"> {{row.historyId}} </td>
+    </ng-container>
+    <!-- Operation type Column -->
+    <ng-container matColumnDef="operation-type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Тип операции</th>
+      <td mat-cell *matCellDef="let row"
+          class="{{choseColumnClassColor(row.isSuccess)}}"> {{row.operationType}}</td>
+    </ng-container>
+    <!-- card-recipient-number Column -->
+    <ng-container matColumnDef="card-recipient-number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Номер карты получателя</th>
+      <td mat-cell *matCellDef="let row"
+          class="{{choseColumnClassColor(row.isSuccess)}}"> {{row.cardRecipientNumber}}</td>
+    </ng-container>
+    <!-- bank-account-recipient-number Column -->
+    <ng-container matColumnDef="bank-account-recipient-number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Номер счета</th>
+      <td mat-cell *matCellDef="let row"
+          class="{{choseColumnClassColor(row.isSuccess)}}"> {{row.bankAccountRecipientNumber}}</td>
+    </ng-container>
+    <!-- Date Column -->
+    <ng-container matColumnDef="date-operation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата</th>
+      <td mat-cell *matCellDef="let row"
+          class="{{choseColumnClassColor(row.isSuccess)}}"> {{row.operationDate | date:'medium'}} </td>
+    </ng-container>
+    <!-- Money Column -->
+    <ng-container matColumnDef="money">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Сумма</th>
+      <td mat-cell *matCellDef="let row"
+          class="{{choseColumnClassColor(row.isSuccess)}}"> {{row.moneyAmount}} {{showCardCurrencyType(row)}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="historyColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: historyColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[3, 5, 7]" aria-label="Select page of users"></mat-paginator>
+</div>

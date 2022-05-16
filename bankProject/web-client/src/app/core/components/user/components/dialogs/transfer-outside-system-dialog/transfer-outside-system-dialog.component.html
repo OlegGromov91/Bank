@@ -1,0 +1,70 @@
+<form [formGroup]="transferToOtherUserForm" class="form-container">
+  <mat-card class="outside-transfer">
+    <mat-card-header>
+      <mat-card-title>Перевод средств клиенту нашего банка</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row card-holder">
+        <div class="col-md-6 card-group">
+          <mat-card>
+            <mat-label>Номер вашей карты:</mat-label>
+            <p>{{card.cardNumber}}</p>
+          </mat-card>
+        </div>
+        <div class="col-md-6 card-group">
+          <mat-card>
+            <mat-label>Баланс вашей карты:</mat-label>
+            <p matPrefix *ngIf="card.currencyType == 'RUR'">&#8381;{{card.moneyAmount}}</p>
+            <p matPrefix *ngIf="card.currencyType == 'USD'">$&nbsp;{{card.moneyAmount}}</p>
+            <p matPrefix *ngIf="card.currencyType == 'EUR'">&#x20ac;{{card.moneyAmount}}</p>
+          </mat-card>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 card-group">
+          <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Номер карты получателя</mat-label>
+            <input matInput formControlName="cardRecipientNumber" type="number" class="example-right-align"
+                   placeholder="16-значный номер" style="margin-left: 5px">
+            <mat-error *ngIf="transferToOtherUserForm.invalid">Введите номер карты
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 card-group">
+          <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>сумма перевода</mat-label>
+            <input matInput formControlName="money" type="number" class="example-right-align" placeholder="0"
+                   style="margin-left: 5px" [max]="card.moneyAmount">
+            <span matPrefix *ngIf="card.currencyType == 'RUR'">&#8381;</span>
+            <span matPrefix *ngIf="card.currencyType == 'USD'">$&nbsp;</span>
+            <span matPrefix *ngIf="card.currencyType == 'EUR'">&#x20ac;</span>
+            <mat-error *ngIf="transferToOtherUserForm.invalid">Сумма не должна превышать сумму на вашей карте и должны
+              быть
+              больше {{minMoneyAmount}}.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 bank-commission">
+        <mat-form-field appearance="outline">
+          <mat-label>Банк получатель</mat-label>
+          <mat-select formControlName="commissionBankType">
+            <mat-option value="{{commission}}"
+                        *ngFor="let commission of bankCommissionType">{{getCommissionType(commission)}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="transferToOtherUserForm.invalid">Выбирите банк получатель</mat-error>
+          <mat-hint *ngIf="transferToOtherUserForm.get('commissionBankType')?.valid"> Коммиссия
+            составит: {{getCommissionMoney(transferToOtherUserForm.value?.commissionBankType)}} &#8381;
+          </mat-hint>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button
+              color="primary" style="margin-top: 10px" (click)="transferMoneyWithCardOutsideSystem()"
+              [disabled]="transferToOtherUserForm.invalid">Перевести
+      </button>
+      <button mat-button (click)="close()">Отмена</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

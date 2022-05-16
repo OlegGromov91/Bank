@@ -1,0 +1,19 @@
+<mat-drawer-container class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
+  <mat-drawer-content>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="{{getUserLogoClass(user.sex)}}"></div>
+        <mat-card-title>{{showUserRole()}}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <br>
+        <p>
+          {{user.firstName}} {{user.middleName}} {{user.secondName}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+    <hr class="sidebar-divider">
+  </mat-drawer-content>
+</mat-drawer-container>
+

@@ -1,0 +1,55 @@
+.bank-card-header-card {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: rgba(43, 54, 44, 0.94);
+  text-align: center;
+}
+
+.application-empty-message {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: rgba(43, 54, 44, 0.94);
+  text-align: center;
+}
+
+.application-active {
+  background: rgb(231, 13, 13);
+  background: linear-gradient(0deg, rgba(231, 13, 13, 0.773546918767507) 0%, rgba(253, 45, 45, 0.2497373949579832) 100%);
+  border: solid;
+  color: #ffd9ce;
+}
+
+.user-data-application-active {
+  color: #a3ffad;
+}
+
+.user-data-application-done {
+  color: black;
+}
+
+.application-done {
+  background: rgb(113, 231, 13);
+  background: linear-gradient(0deg, rgba(113, 231, 13, 0.773546918767507) 0%, rgba(45, 253, 111, 0.2497373949579832) 100%);
+  border: solid;
+}
+
+.application-card {
+  margin-left: 10px;
+  text-align: center;
+}
+
+
+.card-btn {
+  position: absolute;
+  width: 400px;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: rgba(28, 28, 28, 0);
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

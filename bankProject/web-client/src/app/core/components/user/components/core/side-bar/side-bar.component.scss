@@ -1,0 +1,89 @@
+//// SIDE BAR
+
+.side-button-create-card {
+  color: white;
+  background-color: black;
+}
+
+.side-create-card {
+  margin-left: 20%;
+  color: white;
+}
+
+.navbar-nav {
+  transition: all .5s ease;
+  position: fixed;
+  z-index: 1;
+  width: 15rem;
+  height: 100%;
+  box-shadow: 0.063rem 1px;
+}
+
+.bg-gradient-primary {
+  background: rgb(49, 48, 57);
+  background: linear-gradient(90deg, rgba(49, 48, 57, 1) 3%, rgba(18, 97, 97, 1) 33%, rgba(65, 128, 97, 1) 58%);
+}
+
+.sidebar .sidebar-brand {
+  height: 4.375rem;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .05rem;
+  z-index: 1;
+}
+
+.sidebar {
+  width: 15rem !important;
+}
+
+.sidebar-dark .nav-item.active .nav-link {
+  color: #fff;
+}
+
+.sidebar-dark .nav-item .nav-link {
+  color: rgba(255, 255, 255, .8);
+  margin-left: 15px;
+}
+
+.sidebar .nav-item .nav-link span {
+  font-size: .85rem;
+  display: inline;
+}
+
+::after, ::before {
+  box-sizing: border-box;
+}
+
+.admin-logo {
+  background-image: url('/assets/img/users-logo/admin-logo.png');
+  background-size: cover;
+}
+
+.unknown-logo {
+  background-image: url('/assets/img/users-logo/unknown-logo.png');
+  background-size: cover;
+}
+
+.f-user-logo {
+  background-image: url('/assets/img/users-logo/user-f-logo.png');
+  background-size: cover;
+}
+
+.m-user-logo {
+  background-image: url('/assets/img/users-logo/user-m-logo.png');
+  background-size: cover;
+}
+
+.operator-logo {
+  background-image: url('/assets/img/users-logo/operator-logo.png');
+  background-size: cover;
+}
+
+.example-card {
+  background: linear-gradient(90deg, rgba(65, 128, 97, 1) 3%, rgba(18, 97, 97, 1) 33%);
+}
+

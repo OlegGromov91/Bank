@@ -1,0 +1,125 @@
+.bank-card {
+  max-width: 400px;
+  position: relative;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border-radius: 10px;
+}
+
+.bank-cards {
+  margin-left: 200px;
+}
+
+.mat-grid-tile {
+  width: calc(100% - 70px);
+  height: calc(100% - 70px);
+}
+
+.bank-logo {
+  width: 40%;
+  height: 20%;
+}
+
+.payment-logo {
+  width: 15%;
+  height: 8%;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  float: right;
+  background-position: center center;
+}
+
+
+.expire-date {
+  margin-left: 10px;
+}
+
+.card-btn {
+  position: absolute;
+  width: 400px;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: rgba(28, 28, 28, 0);
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.gradient-debut-text {
+  background: rgb(185, 194, 159);
+  background: linear-gradient(90deg, rgba(185, 194, 159, 1) 3%, rgba(135, 134, 29, 1) 38%, rgba(150, 115, 38, 1) 58%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-credit-text {
+  background: rgb(1, 1, 0);
+  background: radial-gradient(circle, rgba(1, 1, 0, 1) 13%, rgba(145, 145, 127, 1) 54%, rgba(83, 81, 74, 1) 93%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.block-alert {
+  background: red;
+  color: white;
+  text-align: center;
+}
+
+.block-button-alert {
+  background: red;
+  color: white;
+}
+
+.mat-grid-title {
+  background-color: white !important;
+}
+
+.debut-money-button {
+  background: linear-gradient(90deg, rgba(185, 194, 159, 1) 3%, rgba(135, 134, 29, 1) 38%, rgba(150, 115, 38, 1) 58%);
+  color: black;
+}
+
+.credit-money-button {
+  background: radial-gradient(circle, rgba(1, 1, 0, 1) 13%, rgba(145, 145, 127, 1) 54%, rgba(83, 81, 74, 1) 93%);
+  color: white;
+}
+
+table {
+  width: 85%;
+
+}
+
+.mat-paginator {
+  width: 85%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 50%;
+}
+
+td, th {
+  width: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.date-alert-column {
+  color: red;
+}
+
+.divider {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: rgb(49, 48, 57);
+  background: linear-gradient(90deg, rgba(49, 48, 57, 1) 3%, rgba(18, 97, 97, 1) 33%, rgba(65, 128, 97, 1) 58%);
+}
+
+.history-header {
+  color: rgba(43, 54, 44, 0.94);
+}
+
