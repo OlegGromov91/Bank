@@ -1,6 +1,6 @@
 # Приложение банка #
 
-Логику приложения можно посмотреть здесь **[AppRoadMap]([https://github.com/OlegGromov91/Bank/blob/main/bankProject/README.md](https://github.com/OlegGromov91/Bank/blob/main/README.md))**
+Логику приложения можно посмотреть здесь **[AppRoadMap](https://github.com/OlegGromov91/Bank/blob/main/bankApp/README.md)**
 
 ### **В проекте были задействованы следующие технологии:** ###
 ___
