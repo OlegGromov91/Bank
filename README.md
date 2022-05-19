@@ -4,13 +4,13 @@
 
 ### **В проекте были задействованы следующие технологии:** ###
 ___
--  **Frontend**:
+- [ ]  **Frontend**:
   - Angular vCLI 13.3.3
   - NodeJS v14.17.3
   - Package manager npm v6.14.13
   - Angular Material UI
 
--  **Backend:**
+- [ ] **Backend:**
   + PostgreSQL v14.2.2
   + Spring Boot v2.6.6
   + MapStruct
