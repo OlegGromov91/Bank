@@ -1,6 +1,6 @@
 package com.data.repo;
 
-import com.data.model.security.user.UnlockRequest;
+import com.data.model.bank.operations.UnlockRequest;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

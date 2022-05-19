@@ -80,6 +80,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  public isPurseIsEmpty(): boolean {
+    return this.cardsEntry.length == 0 && this.bankAccountEntry.length == 0;
+  }
+
   public getPaymentSystemSrc(paymentSystem: PaymentSystem): string {
     return this.paymentSystemLogoSrc.get(paymentSystem) || "";
   }

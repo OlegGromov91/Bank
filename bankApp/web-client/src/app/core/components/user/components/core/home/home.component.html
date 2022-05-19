@@ -8,8 +8,20 @@
   <div class="col-sm"></div>
 </div>
 
+
+<div class="row" *ngIf="isPurseIsEmpty()">
+  <div class="col-sm empty-purse-message">
+    <mat-card class="gradient-custom">
+      <mat-card-subtitle>Кошелек пуст. Нажмите выпустить карту либо откройте счет</mat-card-subtitle>
+    </mat-card>
+
+  </div>
+  <div class="col-sm"></div>
+  <div class="col-sm"></div>
+</div>
+
 <!-- КАРТЫ  -->
-<div class="row">
+<div class="row" *ngIf="cardsEntry.length != 0">
   <mat-card class="col-xl-3 col-md-6 mb-4 bank-card gradient-2" *ngFor="let card of cardsEntry | paginate :
           { id: 'card_pagination',
                   itemsPerPage: 4,
@@ -48,7 +60,7 @@
   </div>
 </div>
 <!-- СЧЕТА  -->
-<div class="row">
+<div class="row" *ngIf="bankAccountEntry.length != 0">
   <mat-card class="col-xl-3 col-md-6 mb-4 bank-card gradient-2" *ngFor="let bankAccount of bankAccountEntry | paginate :
           { id: 'bank_account_pagination',
                   itemsPerPage: 4,

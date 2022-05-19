@@ -40,6 +40,18 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
             <column name="user_sex" value="male"/>
             <column name="user_secret_word" value="$2a$08$XCApIjvuqI3lRgFd9WsHle000g2Zw8MjUXIIGxiSsb/7fYZCCt0cm"/>
         </insert>
+
+        <insert tableName="SEC_USERS">
+            <column name="first_name" value="Евгения"/>
+            <column name="second_name" value="Евгеньева"/>
+            <column name="middle_name" value="Евгеньевна"/>
+            <column name="email" value="EVG@mail.ru"/>
+            <column name="phone_number" value="99345678911"/>
+            <column name="user_is_active" valueBoolean="true"/>
+            <column name="user_login" value="FUser"/>
+            <column name="user_sex" value="female"/>
+            <column name="user_secret_word" value="$2a$08$XCApIjvuqI3lRgFd9WsHle000g2Zw8MjUXIIGxiSsb/7fYZCCt0cm"/>
+        </insert>
     </changeSet>
 
     <changeSet id="2022-19-05 Predefined users permissions" author="Gromov" context="dev">
@@ -63,6 +75,13 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
             <column name="password" value="$2a$08$Qgpf7KBUmd8GhMvWsXeld.eoyxHVDU7AhtdRaR3GeLQk8DTpaa.FW"/>
             <column name="role_type" value="OPERATOR"/>
             <column name="user_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="SEC_USERS_LOGON">
+            <column name="user_logon_id" valueNumeric="4"/>
+            <column name="user_login" value="FUser"/>
+            <column name="password" value="$2a$08$SxQtU/.R7b679NFuOWHCOuooBNClFX0q.PQUGCGDalS9ztp/oNRPu"/>
+            <column name="role_type" value="USER"/>
+            <column name="user_id" valueNumeric="4"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

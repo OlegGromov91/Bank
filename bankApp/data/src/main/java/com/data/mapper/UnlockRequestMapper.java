@@ -1,7 +1,7 @@
 package com.data.mapper;
 
 import com.data.dto.security.user.UnlockRequestDto;
-import com.data.model.security.user.UnlockRequest;
+import com.data.model.bank.operations.UnlockRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -9,7 +9,7 @@ import com.data.model.bank.BanksCommission;
 import com.data.model.bank.bankAccount.BankAccount;
 import com.data.model.bank.card.Card;
 import com.data.model.bank.history.*;
-import com.data.model.security.user.UnlockRequest;
+import com.data.model.bank.operations.UnlockRequest;
 import com.data.repo.HistoryRepository;
 import com.data.repo.UnlockRequestHistoryRepository;
 import org.springframework.security.access.prepost.PreAuthorize;

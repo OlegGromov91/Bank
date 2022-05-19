@@ -1,13 +1,12 @@
 package security.service;
 
 import com.data.exceptions.UserNotFoundException;
-import com.data.model.security.user.AuthCredentialInfo;
-import com.data.model.security.user.AuthUserToken;
+import com.data.dto.security.auth.AuthCredentialInfo;
+import com.data.dto.security.auth.AuthUserToken;
 import com.data.model.security.user.User;
 import com.data.model.security.user.UserLogon;
 import com.data.repo.UserLogonRepository;
 import com.data.repo.UserRepository;
-import org.springframework.context.annotation.Bean;
 import security.component.JwtTokenProvider;
 import security.exception.InvalidCredentialException;
 import org.springframework.beans.factory.annotation.Autowired;

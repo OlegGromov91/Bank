@@ -54,7 +54,8 @@ export class LoginComponent implements OnInit {
       }
     ).catch(
       () => alert("Неверный логин или пароль! \nУчетки: \n" +
-        "user - login: user password: user\n" +
+        "user male - login: user password: user\n" +
+        "user female - login: FUser password: user\n" +
         "operator - login: oper password: oper"
       )
     )

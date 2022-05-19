@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet id="2022-05-19 Card and BankAccount" author="Gromov" context="dev">
+    <changeSet id="2022-05-19 Bank entities" author="Gromov" context="dev">
         <createTable tableName="BANK_CARD" remarks="Карты банковской системы">
             <column name="card_id" remarks="Идентификатор" type="java.sql.Types.BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="pk_card"/>
@@ -46,15 +46,13 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
             <column name="beneficiary_account" remarks="Номер счета" type="varchar(20)">
                 <constraints nullable="false"/>
             </column>
-            <column name="beneficiary_account" remarks="Номер счета" type="varchar(9)">
+            <column name="bik" remarks="БИК" type="varchar(9)">
                 <constraints nullable="false"/>
             </column>
-
-
-            <column name="pin_code" remarks="Пин" type="varchar(255)">
+            <column name="correspondent_bank_type" remarks="Банк" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="cvv" remarks="CVV" type="varchar(255)">
+            <column name="inn" remarks="ИНН" type="varchar(10)">
                 <constraints nullable="false"/>
             </column>
             <column name="expired_date" remarks="Дата просрочки карты" type="TIMESTAMP">
@@ -63,18 +61,30 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
             <column name="created_date" remarks="Дата выпуска карты" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
-            <column name="card_is_active" remarks="Актуальность" type="java.sql.Types.BOOLEAN"
-                    defaultValueBoolean="true"/>
-            <column name="card_is_block" remarks="Блокировка карты" type="java.sql.Types.BOOLEAN"
-                    defaultValueBoolean="false"/>
-            <column name="card_type" remarks="Тип карты" type="varchar(15)"/>
-            <column name="currency_type" remarks="Тип валюты" type="varchar(15)"/>
-            <column name="payment_system" remarks="Тип платежной системы" type="varchar(15)"/>
-            <column name="money_amount" remarks="Сумма на карте" type="java.math.BigDecimal"/>
             <column name="user_id" remarks="Идентификатор пользователя" type="java.sql.Types.BIGINT">
-                <constraints foreignKeyName="fk_card_user" nullable="false"
+                <constraints foreignKeyName="fk_account_user" nullable="false"
                              referencedTableName="SEC_USERS" referencedColumnNames="user_id"/>
             </column>
+            <column name="bank_account_is_active" remarks="Актуальность" type="java.sql.Types.BOOLEAN"
+                    defaultValueBoolean="true"/>
+            <column name="money_amount" remarks="Сумма на карте" type="java.math.BigDecimal"/>
+            <column name="currency_type" remarks="Тип валюты" type="varchar(15)"/>
+        </createTable>
+
+        <createTable tableName="BANK_UNLOCK_REQUEST" remarks="Запрос на разблокировку карты">
+            <column name="unlock_request_id" remarks="Идентификатор" type="java.sql.Types.BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_unlockRequest"/>
+            </column>
+            <column name="user_id" remarks="Идентификатор пользователя" type="java.sql.Types.BIGINT">
+                <constraints foreignKeyName="fk_unlock_user" nullable="false"
+                             referencedTableName="SEC_USERS" referencedColumnNames="user_id"/>
+            </column>
+            <column name="card_id" remarks="Идентификатор карты" type="java.sql.Types.BIGINT">
+                <constraints foreignKeyName="fk_unlock_card" nullable="false"
+                             referencedTableName="BANK_CARD" referencedColumnNames="card_id"/>
+            </column>
+            <column name="application_is_active" remarks="Актуальность" type="java.sql.Types.BOOLEAN"
+                    defaultValueBoolean="true"/>
         </createTable>
 
     </changeSet>

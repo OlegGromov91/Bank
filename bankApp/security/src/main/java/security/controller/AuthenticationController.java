@@ -1,6 +1,6 @@
 package security.controller;
 
-import com.data.model.security.user.AuthCredentialInfo;
+import com.data.dto.security.auth.AuthCredentialInfo;
 import security.service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;

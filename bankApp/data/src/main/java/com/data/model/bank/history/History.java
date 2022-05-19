@@ -21,12 +21,13 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "HISTORY_TYPE")
+@DiscriminatorColumn(name = "history_type")
 @Table(name = "BANK_HISTORY")
 public class History {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "history_id")
     private Long historyId;
 
     @Column(name = "operation_date")
@@ -44,7 +45,7 @@ public class History {
     @Column(name = "commission_money_amount")
     private BigDecimal commissionMoneyAmount;
 
-    @Column(name = "isSuccess")
+    @Column(name = "is_success")
     private Boolean isSuccess;
 
     @Column(name = "money_amount")

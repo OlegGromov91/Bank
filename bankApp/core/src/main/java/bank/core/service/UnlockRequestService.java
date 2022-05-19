@@ -7,7 +7,7 @@ import com.data.exceptions.UnlockRequestNotFoundException;
 import com.data.exceptions.UserNotFoundException;
 import com.data.mapper.UnlockRequestMapper;
 import com.data.model.bank.card.Card;
-import com.data.model.security.user.UnlockRequest;
+import com.data.model.bank.operations.UnlockRequest;
 import com.data.model.security.user.User;
 import com.data.repo.CardRepository;
 import com.data.repo.UnlockRequestRepository;

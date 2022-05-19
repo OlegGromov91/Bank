@@ -22,6 +22,7 @@
 }
 
 .expire-date {
+
   margin-left: 10px;
 }
 
@@ -62,6 +63,8 @@
 
 
 .bank-card-header-card {
+  border: 1px solid;
+  border-radius: 6px;
   margin-top: 5px;
   margin-bottom: 5px;
   color: rgba(43, 54, 44, 0.94);
@@ -72,3 +75,10 @@
 
 }
 
+.empty-purse-message {
+  margin-bottom: 5px;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 50px;
+  max-width: 20%;
+}

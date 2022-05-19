@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="2022-05-19 History entities" author="Gromov" context="dev">
+        <createTable tableName="BANK_HISTORY" remarks="История операций">
+            <column name="history_id" remarks="Идентификатор" type="java.sql.Types.BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_history"/>
+            </column>
+            <column name="history_type" remarks="Тип истории" type="varchar(255)"/>
+            <column name="operation_date" remarks="Дата операции" type="TIMESTAMP"/>
+            <column name="message" remarks="Сообщение" type="varchar(255)"/>
+            <column name="card_recipient_number" remarks="Номер карты получателя" type="varchar(16)"/>
+            <column name="bank_account_recipient_number" remarks="Номер счета получателя" type="varchar(20)"/>
+            <column name="money_amount" remarks="Сумма операции" type="java.math.BigDecimal"/>
+            <column name="commission_money_amount" remarks="Сумма комиссии" type="java.math.BigDecimal"/>
+            <column name="is_success" remarks="Успешность операции" type="java.sql.Types.BOOLEAN"/>
+            <column name="operation_type" remarks="Тип операции" type="varchar(50)"/>
+            <column name="user_id" remarks="Идентификатор пользователя" type="java.sql.Types.BIGINT">
+                <constraints foreignKeyName="fk_history_user"
+                             referencedTableName="SEC_USERS" referencedColumnNames="user_id"/>
+            </column>
+            <column name="card_id" remarks="Идентификатор карты" type="java.sql.Types.BIGINT">
+                <constraints foreignKeyName="fk_history_card"
+                             referencedTableName="BANK_CARD" referencedColumnNames="card_id"/>
+            </column>
+            <column name="bank_account_id" remarks="Идентификатор счета" type="java.sql.Types.BIGINT">
+                <constraints foreignKeyName="fk_history_account"
+                             referencedTableName="BANK_ACCOUNT" referencedColumnNames="bank_account_id"/>
+            </column>
+            <column name="block_reason" remarks="Причина блокировки" type="varchar(255)"/>
+            <column name="unlock_request_id" remarks="Идентификатор запроса на разблокирование карты"
+                    type="java.sql.Types.BIGINT"/>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>
+
+
+
