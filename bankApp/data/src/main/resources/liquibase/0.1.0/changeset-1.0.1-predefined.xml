@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="2022-19-05 Predefined Users" author="Gromov" context="dev">
+        <insert tableName="SEC_USERS">
+            <column name="first_name" value="Олег"/>
+            <column name="second_name" value="Олегов"/>
+            <column name="middle_name" value="Олегович"/>
+            <column name="email" value="Olegovich@mail.ru"/>
+            <column name="phone_number" value="12345678910"/>
+            <column name="user_is_active" valueBoolean="true"/>
+            <column name="user_login" value="admin"/>
+            <column name="user_secret_word" value="$2a$08$XCApIjvuqI3lRgFd9WsHle000g2Zw8MjUXIIGxiSsb/7fYZCCt0cm"/>
+        </insert>
+
+        <insert tableName="SEC_USERS">
+            <column name="first_name" value="Дмитрий"/>
+            <column name="second_name" value="Дмитриев"/>
+            <column name="middle_name" value="Дмитриевич"/>
+            <column name="email" value="Dmitrievich@mail.ru"/>
+            <column name="phone_number" value="12345678911"/>
+            <column name="user_is_active" valueBoolean="true"/>
+            <column name="user_login" value="user"/>
+            <column name="user_sex" value="male"/>
+            <column name="user_secret_word" value="$2a$08$XCApIjvuqI3lRgFd9WsHle000g2Zw8MjUXIIGxiSsb/7fYZCCt0cm"/>
+        </insert>
+
+        <insert tableName="SEC_USERS">
+            <column name="first_name" value="Алексей"/>
+            <column name="second_name" value="Алексеев"/>
+            <column name="middle_name" value="Алексеевич"/>
+            <column name="email" value="Lexa@mail.ru"/>
+            <column name="phone_number" value="12345678915"/>
+            <column name="user_is_active" valueBoolean="true"/>
+            <column name="user_login" value="oper"/>
+            <column name="user_sex" value="male"/>
+            <column name="user_secret_word" value="$2a$08$XCApIjvuqI3lRgFd9WsHle000g2Zw8MjUXIIGxiSsb/7fYZCCt0cm"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2022-19-05 Predefined users permissions" author="Gromov" context="dev">
+        <insert tableName="SEC_USERS_LOGON">
+            <column name="user_logon_id" valueNumeric="1"/>
+            <column name="user_login" value="admin"/>
+            <column name="password" value="$2a$08$ZnxDohVLvWo6w0GMilSFA.StqYOUu8xaOdoywd32.W2ClueuzhkKC"/>
+            <column name="role_type" value="ADMIN"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="SEC_USERS_LOGON">
+            <column name="user_logon_id" valueNumeric="2"/>
+            <column name="user_login" value="user"/>
+            <column name="password" value="$2a$08$SxQtU/.R7b679NFuOWHCOuooBNClFX0q.PQUGCGDalS9ztp/oNRPu"/>
+            <column name="role_type" value="USER"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="SEC_USERS_LOGON">
+            <column name="user_logon_id" valueNumeric="3"/>
+            <column name="user_login" value="oper"/>
+            <column name="password" value="$2a$08$Qgpf7KBUmd8GhMvWsXeld.eoyxHVDU7AhtdRaR3GeLQk8DTpaa.FW"/>
+            <column name="role_type" value="OPERATOR"/>
+            <column name="user_id" valueNumeric="3"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
+
+
+

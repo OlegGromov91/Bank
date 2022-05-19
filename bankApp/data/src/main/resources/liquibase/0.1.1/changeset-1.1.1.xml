@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="2022-05-19 Card and BankAccount" author="Gromov" context="dev">
+        <createTable tableName="BANK_CARD" remarks="Карты банковской системы">
+            <column name="card_id" remarks="Идентификатор" type="java.sql.Types.BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_card"/>
+            </column>
+            <column name="card_number" remarks="Номер карты" type="varchar(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pin_code" remarks="Пин" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cvv" remarks="CVV" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expired_date" remarks="Дата просрочки карты" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" remarks="Дата выпуска карты" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="card_is_active" remarks="Актуальность" type="java.sql.Types.BOOLEAN"
+                    defaultValueBoolean="true"/>
+            <column name="card_is_block" remarks="Блокировка карты" type="java.sql.Types.BOOLEAN"
+                    defaultValueBoolean="false"/>
+            <column name="card_type" remarks="Тип карты" type="varchar(15)"/>
+            <column name="currency_type" remarks="Тип валюты" type="varchar(15)"/>
+            <column name="payment_system" remarks="Тип платежной системы" type="varchar(15)"/>
+            <column name="money_amount" remarks="Сумма на карте" type="java.math.BigDecimal"/>
+            <column name="user_id" remarks="Идентификатор пользователя" type="java.sql.Types.BIGINT">
+                <constraints foreignKeyName="fk_card_user" nullable="false"
+                             referencedTableName="SEC_USERS" referencedColumnNames="user_id"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="BANK_ACCOUNT" remarks="Счета банковской системы">
+            <column name="bank_account_id" remarks="Идентификатор" type="java.sql.Types.BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_bankAccount"/>
+            </column>
+            <column name="beneficiary_account" remarks="Номер счета" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="beneficiary_account" remarks="Номер счета" type="varchar(9)">
+                <constraints nullable="false"/>
+            </column>
+
+
+            <column name="pin_code" remarks="Пин" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cvv" remarks="CVV" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expired_date" remarks="Дата просрочки карты" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" remarks="Дата выпуска карты" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="card_is_active" remarks="Актуальность" type="java.sql.Types.BOOLEAN"
+                    defaultValueBoolean="true"/>
+            <column name="card_is_block" remarks="Блокировка карты" type="java.sql.Types.BOOLEAN"
+                    defaultValueBoolean="false"/>
+            <column name="card_type" remarks="Тип карты" type="varchar(15)"/>
+            <column name="currency_type" remarks="Тип валюты" type="varchar(15)"/>
+            <column name="payment_system" remarks="Тип платежной системы" type="varchar(15)"/>
+            <column name="money_amount" remarks="Сумма на карте" type="java.math.BigDecimal"/>
+            <column name="user_id" remarks="Идентификатор пользователя" type="java.sql.Types.BIGINT">
+                <constraints foreignKeyName="fk_card_user" nullable="false"
+                             referencedTableName="SEC_USERS" referencedColumnNames="user_id"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>
+
+
+

@@ -29,6 +29,7 @@ public class BankAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bank_account_id")
     private Long bankAccountId;
 
     @Max(value = 20L)

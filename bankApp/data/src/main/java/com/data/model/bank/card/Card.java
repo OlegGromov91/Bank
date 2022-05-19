@@ -26,6 +26,7 @@ public class Card {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "card_id")
     private Long cardId;
 
     @Max(value = 16L)

@@ -23,6 +23,7 @@ public class UserLogon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_logon_id")
     private Long userLogonId;
 
     @ManyToOne(fetch = FetchType.LAZY)

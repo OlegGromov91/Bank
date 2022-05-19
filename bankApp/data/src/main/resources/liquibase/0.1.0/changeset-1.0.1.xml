@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="2022-05-19 Users, Logon" author="Gromov" context="dev">
+        <createTable tableName="SEC_USERS" remarks="Пользователи системы">
+            <column name="user_id" remarks="Идентификатор" type="java.sql.Types.BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_user"/>
+            </column>
+            <column name="first_name" remarks="Имя пользователя" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="second_name" remarks="Фамилия пользователя" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_name" remarks="Отчество пользователя" type="varchar(50)"/>
+            <column name="email" remarks="Email" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="phone_number" remarks="Номер телефона пользователя" type="varchar(11)"/>
+            <column name="user_is_active" remarks="Актуальность" type="java.sql.Types.BOOLEAN" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_login" remarks="Login" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="user_sex" remarks="Пол" type="varchar(10)"/>
+            <column name="user_secret_word" remarks="Секретное слово" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="SEC_USERS_LOGON" remarks="Учтека пользователя">
+            <column name="user_logon_id" remarks="Идентификатор" type="java.sql.Types.BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_userLogon"/>
+            </column>
+            <column name="user_login" remarks="Login" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="password" remarks="Пароль" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_type" remarks="Роль пользователя" type="varchar(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" remarks="Идентификатор пользователя" type="java.sql.Types.BIGINT">
+                <constraints foreignKeyName="fk_userrole_user" nullable="false"
+                             referencedTableName="SEC_USERS" referencedColumnNames="user_id"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+
+</databaseChangeLog>
+
+
+
