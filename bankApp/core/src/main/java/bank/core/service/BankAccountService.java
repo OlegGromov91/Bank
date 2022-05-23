@@ -9,12 +9,17 @@ import com.data.model.bank.card.CurrencyType;
 import com.data.model.security.user.User;
 import com.data.repo.BankAccountRepository;
 import com.data.repo.UserRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class BankAccountService {
 
@@ -34,8 +39,12 @@ public class BankAccountService {
     @Transactional
     @PreAuthorize("hasAuthority('bankAccount:create')")
     public BankAccountDto createNewBankAccount(Long userId) {
-        User cardHolder = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        User cardHolder = userRepository.findById(userId).orElseThrow(() -> {
+            log.error(UserNotFoundException.DEFAULT_MESSAGE + " id " + userId);
+            throw new UserNotFoundException();
+        });
         BankAccount bankAccount = bankAccountBuilderComponent.buildNewBankAccount(cardHolder, CurrencyType.RUR);
+        log.info("bankAccountCreated accountNumber " + bankAccount.getBeneficiaryAccount() + " userId: " + userId);
         bankAccountRepository.save(bankAccount);
         return bankAccountMapper.toDto(bankAccount);
     }

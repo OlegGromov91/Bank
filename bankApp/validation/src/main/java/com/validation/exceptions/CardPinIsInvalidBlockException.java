@@ -2,8 +2,10 @@ package com.validation.exceptions;
 
 public class CardPinIsInvalidBlockException extends RuntimeException {
 
+    public static final String DEFAULT_MESSAGE = "pin.code.is.invalid";
+
     public CardPinIsInvalidBlockException() {
-        super();
+        super(DEFAULT_MESSAGE);
     }
 
     public CardPinIsInvalidBlockException(String message) {

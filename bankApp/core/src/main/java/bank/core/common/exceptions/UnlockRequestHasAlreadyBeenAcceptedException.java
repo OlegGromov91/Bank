@@ -1,5 +1,6 @@
 package bank.core.common.exceptions;
 
+import lombok.extern.slf4j.Slf4j;
 
 public class UnlockRequestHasAlreadyBeenAcceptedException extends RuntimeException {
 

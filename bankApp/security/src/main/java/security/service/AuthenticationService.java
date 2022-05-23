@@ -7,6 +7,8 @@ import com.data.model.security.user.User;
 import com.data.model.security.user.UserLogon;
 import com.data.repo.UserLogonRepository;
 import com.data.repo.UserRepository;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import security.component.JwtTokenProvider;
 import security.exception.InvalidCredentialException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class AuthenticationService {
 
@@ -42,7 +45,7 @@ public class AuthenticationService {
             User user = userRepository.findByUserLogin(login).orElseThrow(UserNotFoundException::new);
             UserLogon userLogon = userLogonRepository.findByUserAndUserLogin(user, login).orElseThrow(UserNotFoundException::new);
             String token = jwtTokenProvider.createToken(user.getUserLogin(), userLogon.getRoleType().name());
-            System.out.println(token);
+           log.info("token: " + token);
             return AuthUserToken.builder()
                     .token(token)
                     .userId(user.getUserId())

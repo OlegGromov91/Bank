@@ -1,8 +1,10 @@
 package com.data.exceptions;
 
+import lombok.Getter;
+
 public class UserNotFoundException extends RuntimeException {
 
-    private static final String DEFAULT_MESSAGE = "user.don't.exist";
+    public static final String DEFAULT_MESSAGE = "user.don't.exist";
 
     public UserNotFoundException() {
         super(DEFAULT_MESSAGE);

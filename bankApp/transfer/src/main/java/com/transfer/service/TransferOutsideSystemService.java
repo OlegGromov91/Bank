@@ -40,6 +40,7 @@ public class TransferOutsideSystemService {
         this.cardMapper = cardMapper;
     }
 
+
     @PreAuthorize("hasAuthority('transaction:write')")
     public CardDto transferMoneyWithCardOutsideSystem(Long cardId, SendingTransactionCardDto sendingTransactionCardDto) {
         Card fromCard = cardRepository.findById(cardId).orElseThrow(CardNotFoundExistException::new);

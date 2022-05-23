@@ -13,6 +13,7 @@ import com.data.repo.CardRepository;
 import com.data.repo.UserRepository;
 import com.history.service.HistoryService;
 import com.validation.cardValidator.CardSecurityValidatorComponent;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Slf4j
 @Service
 public class CardService {
 
@@ -44,8 +46,12 @@ public class CardService {
     @Transactional
     @PreAuthorize("hasAuthority('card:create')")
     public CardDto createNewCard(Long userId, String pinCode, String cardType, String currencyType, String paySystem) {
-        User cardHolder = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        User cardHolder = userRepository.findById(userId).orElseThrow(() -> {
+            log.error(UserNotFoundException.DEFAULT_MESSAGE + " id " + userId);
+            throw new UserNotFoundException();
+        });
         Card card = cardBuilderComponent.buildNewCard(cardHolder, pinCode, cardType, currencyType, paySystem);
+        log.info("cardCreated cardNumber " + card.getCardNumber() + " userId: " + userId);
         cardRepository.save(card);
         return cardMapper.toDto(card);
     }
@@ -53,8 +59,12 @@ public class CardService {
     @Transactional
     @PreAuthorize("hasAuthority('card:write')")
     public BasicTransactionDto increaseBalance(Long cardId, BasicTransactionDto basicTransactionDto) {
-        Card card = cardRepository.findById(cardId).orElseThrow(CardNotFoundExistException::new);
+        Card card = cardRepository.findById(cardId).orElseThrow(() -> {
+            log.error(CardNotFoundExistException.DEFAULT_MESSAGE + " id " + cardId);
+            throw new CardNotFoundExistException();
+        });
         card.setMoneyAmount(card.getMoneyAmount().add(new BigDecimal(basicTransactionDto.getMoney())));
+        log.info("balanceIncreased cardId " + cardId + " money: " + basicTransactionDto.getMoney());
         cardRepository.save(card);
         historyService.saveSuccessCardHistoryOperation(card,
                 "money.successfully.transferred",
@@ -74,14 +84,20 @@ public class CardService {
     @Transactional(readOnly = true)
     @PreAuthorize("hasAuthority('card:read')")
     public CardDto getCardById(Long cardId) {
-        Card card = cardRepository.findById(cardId).orElseThrow(CardNotFoundExistException::new);
+        Card card = cardRepository.findById(cardId).orElseThrow(() -> {
+            log.error(CardNotFoundExistException.DEFAULT_MESSAGE + " id " + cardId);
+            throw new CardNotFoundExistException();
+        });
         return cardMapper.toDto(card);
     }
 
     @Transactional(readOnly = true)
     @PreAuthorize("hasAuthority('card:read')")
     public void checkCardPinCode(Long cardId, String pinCode) {
-        Card card = cardRepository.findById(cardId).orElseThrow(CardNotFoundExistException::new);
+        Card card = cardRepository.findById(cardId).orElseThrow(() -> {
+            log.error(CardNotFoundExistException.DEFAULT_MESSAGE + " id " + cardId);
+            throw new CardNotFoundExistException();
+        });
         cardSecurityValidatorComponent.pinIsValid(pinCode, card.getPinCodeHash());
     }
 

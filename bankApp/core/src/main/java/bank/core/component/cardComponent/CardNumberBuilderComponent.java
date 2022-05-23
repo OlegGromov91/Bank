@@ -19,7 +19,7 @@ public class CardNumberBuilderComponent {
     private static final String SBER_BANK_IDENTIFY = "276160";
     private static final int MAX_ACCOUNT_NUMBER_LENGTH = 6;
     private static final String START_CHECK_SUM_VALUE = "0";
-    private static final StringBuilder sb = new StringBuilder();
+    private static final StringBuffer sb = new StringBuffer();
 
     /**
      * @param paymentSystem тип платежной системы
@@ -61,8 +61,7 @@ public class CardNumberBuilderComponent {
         String cardNumberSum = String.valueOf(generateSumFromCardNumber(value));
         int checkSum = STEP_CARD_VALIDATOR - Integer.parseInt(cardNumberSum.substring(1));
         return validate(cardNumberSum) | checkSum == STEP_CARD_VALIDATOR ?
-                this.START_CHECK_SUM_VALUE :
-                String.valueOf(checkSum);
+                this.START_CHECK_SUM_VALUE : String.valueOf(checkSum);
     }
 
     private boolean validate(String value) {
