@@ -39,7 +39,7 @@ public class UnlockRequestService {
         this.unlockRequestMapper = unlockRequestMapper;
     }
 
-    @Transactional(readOnly = true)
+
     @PreAuthorize("hasAuthority('card:unlock')")
     public List<UnlockRequestDto> showUnlockRequests() {
         List<UnlockRequest> unlockRequests = (List<UnlockRequest>) unlockRequestRepository.findAll();

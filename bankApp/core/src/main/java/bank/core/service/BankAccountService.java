@@ -49,7 +49,7 @@ public class BankAccountService {
         return bankAccountMapper.toDto(bankAccount);
     }
 
-    @Transactional
+
     @PreAuthorize("hasAuthority('bankAccount:create')")
     public List<BankAccountDto> findAllBankAccountsByUserId(Long userId) {
         List<BankAccount> bankAccounts = bankAccountRepository.findAllByBeneficiaryUserId(userId);

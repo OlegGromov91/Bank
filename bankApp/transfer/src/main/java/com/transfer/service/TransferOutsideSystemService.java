@@ -14,6 +14,7 @@ import com.transfer.component.BaseTransferOperationComponent;
 import com.validation.transferValidator.TransferValidation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -67,11 +68,6 @@ public class TransferOutsideSystemService {
                 BanksCommission.TINKOFF_BANK, BanksCommission.TINKOFF_BANK.commissionAmount);
     }
 
-
-    @PreAuthorize("hasAuthority('transaction:restart')")
-    public Card unlockedBlockedOperation(Long cardSenderId, Long cardRecipientId, String moneyOperation) {
-        return null;
-    }
 
 
 }

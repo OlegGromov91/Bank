@@ -21,7 +21,7 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    @Transactional
+
     @PreAuthorize("hasAuthority('user:read')")
     public UserDto getUser(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);

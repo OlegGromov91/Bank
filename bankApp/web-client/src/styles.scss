@@ -53,3 +53,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: #000000;
   background: #11cb71;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

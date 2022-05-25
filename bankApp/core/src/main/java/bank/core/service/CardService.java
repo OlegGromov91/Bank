@@ -74,7 +74,7 @@ public class CardService {
         return basicTransactionDto;
     }
 
-    @Transactional(readOnly = true)
+
     @PreAuthorize("hasAuthority('card:read')")
     public List<CardDto> showCards(Long userId) {
         List<Card> cards = cardRepository.findAllByUserUserId(userId);
@@ -91,7 +91,7 @@ public class CardService {
         return cardMapper.toDto(card);
     }
 
-    @Transactional(readOnly = true)
+
     @PreAuthorize("hasAuthority('card:read')")
     public void checkCardPinCode(Long cardId, String pinCode) {
         Card card = cardRepository.findById(cardId).orElseThrow(() -> {
