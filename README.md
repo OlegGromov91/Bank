@@ -8,7 +8,7 @@ ___
   - Angular vCLI 13.3.3
   - NodeJS v14.17.3
   - Package manager npm v6.14.13
-  - Angular Material UI
+  - Angular Material UI  (Indigo & pink theme)
 
 - [ ] **Backend:**
   + PostgreSQL v14.2.2
