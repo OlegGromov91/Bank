@@ -1,9 +1,9 @@
 package bank.core.contoller;
 
 import bank.core.service.CardService;
-import com.data.dto.bank.card.CardDto;
-import com.data.dto.bank.card.CardValidationDto;
-import com.data.dto.bank.transaction.BasicTransactionDto;
+import bank.data.dto.bank.card.CardDto;
+import bank.data.dto.bank.card.CardValidationDto;
+import bank.data.dto.bank.transaction.BasicTransactionDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

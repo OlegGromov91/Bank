@@ -1,22 +1,22 @@
 package bank.core.contoller;
 
 import bank.core.common.exceptions.UnlockRequestHasAlreadyBeenAcceptedException;
-import com.data.exceptions.BankAccountNotFoundExistException;
-import com.data.exceptions.CardNotFoundExistException;
-import com.data.exceptions.UnlockRequestNotFoundException;
-import com.data.exceptions.UserNotFoundException;
-import com.frod.common.exceptions.FrodOperationException;
-import com.validation.exceptions.CardIsBlockException;
-import com.validation.exceptions.CardPinIsInvalidBlockException;
-import com.validation.exceptions.IllegalOperationException;
-import com.validation.exceptions.UserSecretWordIsNotValidException;
+import bank.data.exceptions.BankAccountNotFoundExistException;
+import bank.data.exceptions.CardNotFoundExistException;
+import bank.data.exceptions.UnlockRequestNotFoundException;
+import bank.data.exceptions.UserNotFoundException;
+import bank.frod.common.exceptions.FrodOperationException;
+import bank.validation.exceptions.CardIsBlockException;
+import bank.validation.exceptions.CardPinIsInvalidBlockException;
+import bank.validation.exceptions.IllegalOperationException;
+import bank.validation.exceptions.UserSecretWordIsNotValidException;
 import lombok.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import security.exception.InvalidCredentialException;
-import security.exception.JwtAuthenticationException;
+import bank.security.exception.InvalidCredentialException;
+import bank.security.exception.JwtAuthenticationException;
 
 /**
  * Контроллер отлова исключений

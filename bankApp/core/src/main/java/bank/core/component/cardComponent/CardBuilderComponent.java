@@ -1,10 +1,10 @@
 package bank.core.component.cardComponent;
 
-import com.data.model.bank.card.Card;
-import com.data.model.bank.card.CardType;
-import com.data.model.bank.card.CurrencyType;
-import com.data.model.bank.card.PaymentSystem;
-import com.data.model.security.user.User;
+import bank.data.model.bank.card.Card;
+import bank.data.model.bank.card.CardType;
+import bank.data.model.bank.card.CurrencyType;
+import bank.data.model.bank.card.PaymentSystem;
+import bank.data.model.security.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

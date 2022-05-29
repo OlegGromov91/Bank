@@ -1,13 +1,12 @@
 package bank.core.service;
 
-import com.data.dto.security.user.UserDto;
-import com.data.exceptions.UserNotFoundException;
-import com.data.mapper.UserMapper;
-import com.data.model.security.user.User;
-import com.data.repo.UserRepository;
+import bank.data.dto.security.user.UserDto;
+import bank.data.exceptions.UserNotFoundException;
+import bank.data.mapper.UserMapper;
+import bank.data.model.security.user.User;
+import bank.data.repo.UserRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 @Service

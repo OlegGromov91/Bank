@@ -1,19 +1,16 @@
 package bank.core.service;
 
 import bank.core.component.bankAccountComponent.bankAccountBuilder.BankAccountBuilderComponent;
-import com.data.dto.bank.bankAccount.BankAccountDto;
-import com.data.exceptions.UserNotFoundException;
-import com.data.mapper.BankAccountMapper;
-import com.data.model.bank.bankAccount.BankAccount;
-import com.data.model.bank.card.CurrencyType;
-import com.data.model.security.user.User;
-import com.data.repo.BankAccountRepository;
-import com.data.repo.UserRepository;
+import bank.data.dto.bank.bankAccount.BankAccountDto;
+import bank.data.exceptions.UserNotFoundException;
+import bank.data.mapper.BankAccountMapper;
+import bank.data.model.bank.bankAccount.BankAccount;
+import bank.data.model.bank.card.CurrencyType;
+import bank.data.model.security.user.User;
+import bank.data.repo.BankAccountRepository;
+import bank.data.repo.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

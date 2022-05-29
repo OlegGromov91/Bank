@@ -1,9 +1,9 @@
 package bank.core.component.bankAccountComponent.bankAccountBuilder;
 
-import com.data.model.bank.bankAccount.BankAccount;
-import com.data.model.bank.bankAccount.CorrespondentBankType;
-import com.data.model.bank.card.CurrencyType;
-import com.data.model.security.user.User;
+import bank.data.model.bank.bankAccount.BankAccount;
+import bank.data.model.bank.bankAccount.CorrespondentBankType;
+import bank.data.model.bank.card.CurrencyType;
+import bank.data.model.security.user.User;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

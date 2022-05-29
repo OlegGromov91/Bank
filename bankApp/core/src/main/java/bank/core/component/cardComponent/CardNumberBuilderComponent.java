@@ -1,8 +1,8 @@
 package bank.core.component.cardComponent;
 
-import com.data.model.bank.card.CardType;
-import com.data.model.bank.card.CurrencyType;
-import com.data.model.bank.card.PaymentSystem;
+import bank.data.model.bank.card.CardType;
+import bank.data.model.bank.card.CurrencyType;
+import bank.data.model.bank.card.PaymentSystem;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;

@@ -1,10 +1,10 @@
 package bank.core.component.cardComponent;
 
 
-import com.validation.cardValidator.CardSecurityValidatorComponent;
+import bank.validation.cardValidator.CardSecurityValidatorComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import security.component.PasswordEncoder;
+import bank.security.component.PasswordEncoder;
 
 import java.security.SecureRandom;
 import java.util.stream.Collectors;

@@ -1,7 +1,7 @@
 package bank.core.component.cardComponent;
 
-import com.data.model.bank.card.Card;
-import com.data.model.bank.card.CurrencyType;
+import bank.data.model.bank.card.Card;
+import bank.data.model.bank.card.CurrencyType;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

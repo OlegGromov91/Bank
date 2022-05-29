@@ -1,7 +1,7 @@
 package bank.core.contoller;
 
 import bank.core.service.UserService;
-import com.data.dto.security.user.UserDto;
+import bank.data.dto.security.user.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
