@@ -9,11 +9,13 @@ import bank.data.model.bank.BanksCommission;
 import bank.data.model.bank.card.Card;
 import bank.data.model.bank.history.OperationType;
 import bank.data.repo.CardRepository;
+import bank.frod.common.exceptions.FrodOperationException;
 import bank.history.service.HistoryService;
 import bank.transfer.component.BaseTransferOperationComponent;
 import bank.validation.transferValidator.TransferValidation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -40,7 +42,7 @@ public class TransferOutsideSystemService {
         this.cardMapper = cardMapper;
     }
 
-
+    @Transactional(noRollbackFor = FrodOperationException.class)
     @PreAuthorize("hasAuthority('transaction:write')")
     public CardDto transferMoneyWithCardOutsideSystem(Long cardId, SendingTransactionCardDto sendingTransactionCardDto) {
         Card fromCard = cardRepository.findById(cardId).orElseThrow(CardNotFoundExistException::new);
